@@ -1,5 +1,6 @@
 module github.com/daylikon/xk6-kafka
 
+
 go 1.21
 
 require (
