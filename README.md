@@ -1,6 +1,40 @@
 # <img src="https://github.com/mostafa/xk6-kafka/blob/main/assets/xk6-kafka-logo.png" alt="xk6-kafka logo" style="height: 32px; width:32px;"/> xk6-kafka
 
-[![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/mostafa/xk6-kafka/test.yaml?branch=main&logo=github)](https://github.com/mostafa/xk6-kafka/actions) [![Docker Pulls](https://img.shields.io/docker/pulls/mostafamoradian/xk6-kafka?logo=docker)](https://hub.docker.com/r/mostafamoradian/xk6-kafka) [![Coverage Status](https://coveralls.io/repos/github/mostafa/xk6-kafka/badge.svg?branch=main)](https://coveralls.io/github/mostafa/xk6-kafka?branch=main) [![Go Reference](https://pkg.go.dev/badge/github.com/mostafa/xk6-kafka.svg)](https://pkg.go.dev/github.com/mostafa/xk6-kafka)
+[Main repository](https://github.com/mostafa/xk6-kafka/)
+
+[![Go Reference](https://pkg.go.dev/badge/github.com/mostafa/xk6-kafka.svg)](https://pkg.go.dev/github.com/daylikon/xk6-kafka)
+
+## Fork Changes
+
+Set `name` field for requests and get information about them in statistics.
+
+### Usage
+
+#### Producer
+
+```javascript
+    let message = [
+      {
+        name: "myRequestName", // set the name of producer request
+        value: schemaRegistry.serialize({
+          data: {
+            name: '{ data : "someData"}',
+          },
+          schema: { schema: valueSchema },
+          schemaType: SCHEMA_TYPE_AVRO,
+        }),
+      },
+    ];
+   writer.produce({ messages: message });
+```
+
+#### Consumer
+
+```javascript
+let messages = reader.consume({ limit: 5, name: "myReaderRequest" }); // specify name field for consumer
+```
+
+## About plugin
 
 The xk6-kafka project is a [k6 extension](https://k6.io/docs/extensions/guides/what-are-k6-extensions/) that enables k6 users to load test Apache Kafka using a producer and possibly a consumer for debugging.
 
